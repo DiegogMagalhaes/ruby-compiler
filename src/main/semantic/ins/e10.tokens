@@ -1,0 +1,16 @@
+RW_DEF def
+ID_LOCAL erroRetornoFloatEmBool
+OP_LPAREN (
+ID_LOCAL taxa
+OP_COMMA ,
+ID_LOCAL valor
+OP_RPAREN )
+ID_LOCAL desconto
+OP_ASSIGN =
+ID_LOCAL valor
+OP_MULTIPLY *
+ID_LOCAL taxa
+RW_RETURN return
+ID_LOCAL desconto
+RW_END end
+$ $

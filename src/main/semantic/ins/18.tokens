@@ -1,0 +1,8 @@
+RW_DEF def
+ID_LOCAL verdadeiro
+OP_LPAREN (
+OP_RPAREN )
+RW_RETURN return
+RW_TRUE true
+RW_END end
+$ $

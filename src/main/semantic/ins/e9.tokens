@@ -1,0 +1,16 @@
+RW_DEF def
+ID_LOCAL erroIgualdadeTiposMistos
+OP_LPAREN (
+ID_LOCAL x
+OP_COMMA ,
+ID_LOCAL b
+OP_RPAREN )
+ID_LOCAL resultado
+OP_ASSIGN =
+ID_LOCAL x
+OP_EQUAL ==
+ID_LOCAL b
+RW_RETURN return
+ID_LOCAL resultado
+RW_END end
+$ $

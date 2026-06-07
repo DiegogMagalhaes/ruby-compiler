@@ -1,0 +1,161 @@
+options {
+    STATIC = false;
+}
+
+PARSER_BEGIN(RubyLexer)
+
+public class RubyLexer {
+
+    public static void main(String[] args) {
+        try {
+            RubyLexer lexer = new RubyLexer(System.in);
+            Token t;
+            while ((t = lexer.getNextToken()).kind != RubyLexerConstants.EOF) {
+                String tokenName = "UNKNOWN";
+
+                try {
+                    for (java.lang.reflect.Field field : RubyLexerConstants.class.getDeclaredFields()) {
+                        if (field.getType() == int.class && field.getInt(null) == t.kind) {
+                            tokenName = field.getName();
+                            break;
+                        }
+                    }
+                } catch (Exception ex) { }
+
+                System.out.println(tokenName + " " + t.image);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro: " + e.getMessage());
+        }
+    }
+}
+PARSER_END(RubyLexer)
+
+SKIP : {
+  " "
+ | "\t"
+ | "\r"
+ | "\n"
+ | < "#" (~["\n"])* >
+}
+
+// Palavras reservadas
+TOKEN : {
+   < RW_PRE_EXEC_BEGIN : "BEGIN">
+ | < RW_PRE_EXEC_END : "END">
+ | < RW_ALIAS : "alias">
+ | < RW_AND : "and">
+ | < RW_BEGIN : "begin">
+ | < RW_BREAK : "break">
+ | < RW_CASE : "case">
+ | < RW_CLASS : "class">
+ | < RW_DEF : "def">
+ | < RW_DEFINED : "defined">
+ | < RW_DO : "do">
+ | < RW_ELSE : "else">
+ | < RW_ELSIF : "elsif">
+ | < RW_END : "end">
+ | < RW_ENSURE : "ensure">
+ | < RW_FALSE : "false">
+ | < RW_FOR : "for">
+ | < RW_IF : "if">
+ | < RW_IN : "in">
+ | < RW_MODULE : "module">
+ | < RW_NEXT : "next">
+ | < RW_NIL : "nil">
+ | < RW_NOT : "not">
+ | < RW_OR : "or">
+ | < RW_REDO : "redo">
+ | < RW_RESCUE : "rescue">
+ | < RW_RETRY : "retry">
+ | < RW_RETURN : "return">
+ | < RW_SELF : "self">
+ | < RW_SUPER : "super">
+ | < RW_THEN : "then">
+ | < RW_TRUE : "true">
+ | < RW_UNDEF : "undef">
+ | < RW_UNLESS : "unless">
+ | < RW_UNTIL : "until">
+ | < RW_WHEN : "when">
+ | < RW_WHILE : "while">
+ | < RW_YIELD : "yield">
+
+}
+
+//Identificadores
+TOKEN : {
+
+< #LETTER: ["a"-"z", "A"-"Z"]>
+ | < #DIGIT: ["0"-"9"]>
+
+ | < ID_GLOBAL: "$" (<LETTER> | "_") (<LETTER> | <DIGIT> | "_")* >
+ | < ID_CLASS: "@@" (<LETTER> | "_") (<LETTER> | <DIGIT> | "_")* >
+ | < ID_INSTANCE: "@" (<LETTER> | "_") (<LETTER> | <DIGIT> | "_")* >
+ | < ID_CONSTANT: ["A"-"Z"] (<LETTER> | <DIGIT> | "_")* >
+ | < ID_LOCAL: (["a"-"z", "_"]) (<LETTER> | <DIGIT> | "_")* >
+}
+
+//Numeros
+TOKEN : {
+ < NUM_INT: (<DIGIT>)+ ("_" (<DIGIT>)+)* >
+ | <NUM_DEC: (<DIGIT>)+ ("_" (<DIGIT>)+)* "." (<DIGIT>)+ ("_" (<DIGIT>)+)* (["e", "E"] (["+", "-"])? (<DIGIT>)+ ("_" (<DIGIT>)+)*)?>
+ | <NUM_HEX: "0" ["x", "X"] (["0"-"9", "a"-"f", "A"-"F", "_"])+ >
+ | <NUM_BIN: "0" ["b","B"] (["0","1","_"])+>
+ | <NUM_OCT: "0" (["0"-"7", "_"])+>
+ | <NUM_CHAR_ASCII: "?" (~[" ", "\n", "\t", "\r", "\\"]) >
+}
+
+//String
+TOKEN : {
+<STRING_SINGLE: "'" (~["'", "\\" ] |"\\\\"|"\\'")* "'">
+ | <STRING_DOUBLE: "\"" (~["\"", "\\"] | "\\" ~[])*"\"">
+}
+
+//Operadores
+TOKEN : {
+
+ < OP_CASE_EQUAL : "===">
+ | < OP_SPACESHIP : "<=>">
+ | < OP_RANGE_EXC : "...">
+ | < OP_SCOPE : "::">
+ | < OP_EXP : "**">
+ | < OP_RSHIFT : ">>">
+ | < OP_LSHIFT : "<<">
+ | < OP_PLUS_ASSIGN: "+=" >
+ | < OP_MINUS_ASSIGN: "-=">
+ | < OP_MULT_ASSIGN: "*=">
+ | < OP_DIV_ASSIGN: "/=">
+ | < OP_MOD_ASSIGN: "%=">
+ | < OP_GREATER_EQUAL: ">=">
+ | < OP_LESS_EQUAL: "<=">
+ | < OP_EQUAL: "==">
+ | < OP_NOT_EQUAL: "!=">
+ | < OP_MATCH : "=~">
+ | < OP_NOT_MATCH : "!~">
+ | < OP_AND: "&&">
+ | < OP_OR: "||">
+ | < OP_RANGE_INC : "..">
+ | < OP_PLUS: "+">
+ | < OP_MINUS: "-">
+ | < OP_MULTIPLY: "*">
+ | < OP_DIVIDE: "/">
+ | < OP_MOD: "%">
+ | < OP_BIT_NOT : "~">
+ | < OP_BIT_AND : "&">
+ | < OP_BIT_OR : "|">
+ | < OP_BIT_XOR : "^">
+ | < OP_ASSIGN: "=">
+ | < OP_GREATER: ">">
+ | < OP_LESS: "<">
+ | < OP_NOT: "!">
+ | < OP_LPAREN: "(">
+ | < OP_RPAREN: ")">
+ | < OP_LBRACE: "{">
+ | < OP_RBRACE: "}">
+ | < OP_LBRACKET: "[">
+ | < OP_RBRACKET: "]">
+ | < OP_COMMA: ",">
+ | < OP_DOT: ".">
+ | < OP_COLON: ":" >
+}
+

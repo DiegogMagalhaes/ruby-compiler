@@ -1,0 +1,14 @@
+RW_DEF def
+ID_LOCAL erroRetornoFloat
+OP_LPAREN (
+ID_LOCAL a
+OP_RPAREN )
+ID_LOCAL resultado
+OP_ASSIGN =
+ID_LOCAL a
+OP_MULTIPLY *
+NUM_DEC 1.5
+RW_RETURN return
+ID_LOCAL resultado
+RW_END end
+$ $

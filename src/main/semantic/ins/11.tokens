@@ -1,0 +1,13 @@
+RW_DEF def
+ID_LOCAL inverte
+OP_LPAREN (
+ID_LOCAL b
+OP_RPAREN )
+ID_LOCAL resultado
+OP_ASSIGN =
+OP_NOT !
+ID_LOCAL b
+RW_RETURN return
+ID_LOCAL resultado
+RW_END end
+$ $

@@ -1,0 +1,11 @@
+RW_DEF def
+ID_LOCAL constante
+OP_LPAREN (
+OP_RPAREN )
+ID_LOCAL x
+OP_ASSIGN =
+NUM_INT 42
+RW_RETURN return
+ID_LOCAL x
+RW_END end
+$ $

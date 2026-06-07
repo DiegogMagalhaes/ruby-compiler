@@ -1,0 +1,16 @@
+RW_DEF def
+ID_LOCAL modulo
+OP_LPAREN (
+ID_LOCAL a
+OP_COMMA ,
+ID_LOCAL b
+OP_RPAREN )
+ID_LOCAL resto
+OP_ASSIGN =
+ID_LOCAL a
+OP_MOD %
+ID_LOCAL b
+RW_RETURN return
+ID_LOCAL resto
+RW_END end
+$ $

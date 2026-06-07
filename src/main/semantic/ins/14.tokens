@@ -1,0 +1,11 @@
+RW_DEF def
+ID_LOCAL dobro
+OP_LPAREN (
+ID_LOCAL n
+OP_RPAREN )
+RW_RETURN return
+ID_LOCAL n
+OP_MULTIPLY *
+NUM_INT 2
+RW_END end
+$ $

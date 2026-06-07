@@ -1,0 +1,16 @@
+RW_DEF def
+ID_LOCAL erroRetornoInt
+OP_LPAREN (
+ID_LOCAL a
+OP_COMMA ,
+ID_LOCAL b
+OP_RPAREN )
+ID_LOCAL soma
+OP_ASSIGN =
+ID_LOCAL a
+OP_PLUS +
+ID_LOCAL b
+RW_RETURN return
+ID_LOCAL soma
+RW_END end
+$ $

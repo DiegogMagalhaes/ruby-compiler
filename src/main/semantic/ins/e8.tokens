@@ -1,0 +1,16 @@
+RW_DEF def
+ID_LOCAL erroMenorBool
+OP_LPAREN (
+ID_LOCAL ativo
+OP_COMMA ,
+ID_LOCAL limite
+OP_RPAREN )
+ID_LOCAL resultado
+OP_ASSIGN =
+ID_LOCAL ativo
+OP_LESS <
+ID_LOCAL limite
+RW_RETURN return
+ID_LOCAL resultado
+RW_END end
+$ $
