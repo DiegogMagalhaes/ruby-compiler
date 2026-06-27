@@ -30,8 +30,13 @@ T -> T OP_DIVIDE F
 T -> T OP_MOD F
 T -> F
 F -> OP_LPAREN Ea OP_RPAREN
+F -> ID_LOCAL OP_LPAREN ArgList OP_RPAREN
 F -> ID_LOCAL
 F -> NUM_INT
 F -> NUM_DEC
 F -> RW_TRUE
 F -> RW_FALSE
+ArgList -> ''
+ArgList -> ArgListx
+ArgListx -> Ea
+ArgListx -> Ea OP_COMMA ArgListx

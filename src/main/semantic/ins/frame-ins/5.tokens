@@ -1,0 +1,17 @@
+RW_DEF def
+ID_LOCAL loop
+OP_LPAREN (
+OP_RPAREN )
+RW_WHILE while
+ID_LOCAL continuarExecucao
+OP_LPAREN (
+ID_LOCAL contador
+OP_RPAREN )
+ID_LOCAL contador
+OP_ASSIGN =
+ID_LOCAL contador
+OP_PLUS +
+NUM_INT 1
+RW_END end
+RW_END end
+$ $

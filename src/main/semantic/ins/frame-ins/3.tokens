@@ -1,0 +1,17 @@
+RW_DEF def
+ID_LOCAL verificar
+OP_LPAREN (
+ID_LOCAL id
+OP_RPAREN )
+RW_IF if
+ID_LOCAL validarUsuario
+OP_LPAREN (
+ID_LOCAL id
+OP_RPAREN )
+OP_EQUAL ==
+RW_TRUE true
+RW_RETURN return
+RW_TRUE true
+RW_END end
+RW_END end
+$ $

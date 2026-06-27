@@ -13,13 +13,13 @@
 #include "ExpressaoSubtracao.hpp"
 #include "ExpressaoValor.hpp"
 #include "ExpressaoVariavel.hpp"
+#include "ExpressaoChamada.hpp"
 #include "ID.hpp"
 #include "ValorLiteral.hpp"
 #include <iostream>
 #include "debug-util.hpp"
 using namespace std;
 
-// Números de regra conforme tabela_lr1.conf da gramática Ruby
 Expressao* Expressao::extrai_expressao(No_arv_parse* no) {
   switch (no->regra) {
 
@@ -109,15 +109,24 @@ Expressao* Expressao::extrai_expressao(No_arv_parse* no) {
   case 31: { // F -> OP_LPAREN Ea OP_RPAREN
     return extrai_expressao(no->filhos[1]);
   }
-  case 32: { // F -> ID_LOCAL
+
+  case 32: { // F -> ID_LOCAL OP_LPAREN ArgList OP_RPAREN
+    ExpressaoChamada* res = new ExpressaoChamada();
+    res->nome_funcao = ID::extrai_ID(no->filhos[0]);
+    extrai_lista_argumentos(no->filhos[2], res->arglist);
+    return res;
+  }
+
+  case 33: { // F -> ID_LOCAL
     ExpressaoVariavel* res = new ExpressaoVariavel();
     res->nome = ID::extrai_ID(no->filhos[0]);
     return res;
   }
-  case 33: // F -> NUM_INT
-  case 34: // F -> NUM_DEC
-  case 35: // F -> RW_TRUE
-  case 36: { // F -> RW_FALSE
+
+  case 34: // F -> NUM_INT
+  case 35: // F -> NUM_DEC
+  case 36: // F -> RW_TRUE
+  case 37: { // F -> RW_FALSE
     ExpressaoValor* res = new ExpressaoValor();
     res->valor = ValorLiteral::extrai_valor_literal(no->filhos[0]);
     return res;
@@ -126,6 +135,27 @@ Expressao* Expressao::extrai_expressao(No_arv_parse* no) {
   default:
     cerr << "Erro: expressao desconhecida regra=" << no->regra << endl;
     return NULL;
+  }
+}
+
+void Expressao::extrai_lista_argumentos(No_arv_parse* no, vector<Expressao*>& lista) {
+  if (!no) return;
+  switch (no->regra) {
+  case 38: // ArgList -> ''
+    return;
+  case 39: // ArgList -> ArgListx
+    extrai_lista_argumentos(no->filhos[0], lista);
+    return;
+  case 40: // ArgListx -> Ea
+    lista.push_back(extrai_expressao(no->filhos[0]));
+    return;
+  case 41: // ArgListx -> Ea OP_COMMA ArgListx
+    lista.push_back(extrai_expressao(no->filhos[0]));
+    extrai_lista_argumentos(no->filhos[2], lista);
+    return;
+  default:
+    cerr << "Erro: regra desconhecida em extrai_lista_argumentos=" << no->regra << endl;
+    return;
   }
 }
 

@@ -16,6 +16,7 @@ using namespace std;
 #include "Analisador.hpp"
 #include "Tipo.hpp"
 #include "ValorLiteral.hpp"
+#include "FrameFuncao.hpp"
 
 // ------------------------------------------------------------
 // Le parametros de um arquivo .params
@@ -50,7 +51,7 @@ vector<ValorLiteral> le_params(const string& caminho) {
 }
 
 int main(int argc, char* argv[]) {
-  if (argc != 1 && argc != 3 && argc != 4) {
+  if (argc != 1 && argc != 2 && argc != 3 && argc != 4) {
     cerr << "Uso: " << argv[0]
          << " [gramatica.site tabela_lr1.conf [arquivo.params]]" << endl;
     return 1;
@@ -66,6 +67,8 @@ int main(int argc, char* argv[]) {
   }
   if (argc == 4) {
     nome_params = argv[3];
+  }else if(argc == 2){
+    nome_params = argv[2];
   }
 
   ifstream arq_gramatica(nome_gramatica);
@@ -97,5 +100,8 @@ int main(int argc, char* argv[]) {
 
   Analisador ana;
   ana.calcula_retorno(func, parametros_passados);
+
+  FrameFuncao* frame = FrameFuncao::gera_frame_de_funcao(func);
+  frame->debug();
   return 0;
 }

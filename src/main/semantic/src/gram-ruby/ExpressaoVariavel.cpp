@@ -3,7 +3,9 @@
 #include "debug-util.hpp"
 
 using namespace std;
-ExpressaoVariavel::ExpressaoVariavel() { }
+ExpressaoVariavel::ExpressaoVariavel() {
+   acesso_frame = NULL;
+}
 
 void ExpressaoVariavel::debug_com_tab(int tab) {
   tab3(tab);

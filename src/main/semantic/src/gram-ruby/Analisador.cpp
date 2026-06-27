@@ -18,6 +18,7 @@
 #include "ExpressaoSubtracao.hpp"
 #include "ExpressaoValor.hpp"
 #include "ExpressaoVariavel.hpp"
+#include "ExpressaoChamada.hpp"
 #include "Tipo.hpp"
 #include <iostream>
 #include <vector>
@@ -176,6 +177,13 @@ static ValorLiteral avalia(Expressao* expr, PilhaEscopos& escopos) {
     return opera_rel(">",  avalia(e->esquerda,escopos), avalia(e->direita,escopos));
   if (auto* e = dynamic_cast<ExpressaoMaiorIgual*>(expr))
     return opera_rel(">=", avalia(e->esquerda,escopos), avalia(e->direita,escopos));
+
+  if (auto* e = dynamic_cast<ExpressaoChamada*>(expr)) {
+    cerr << "Aviso: chamada de funcao '" << e->nome_funcao->nome << "' retorna valor padrao" << endl;
+    res.tipo = new Tipo(Tipo::INT);
+    res.valor_int = 0;
+    return res;
+  }
 
   cerr << "Erro: expressao desconhecida em avalia()" << endl;
   return res;

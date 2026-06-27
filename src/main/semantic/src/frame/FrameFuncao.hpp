@@ -13,6 +13,8 @@ public:
 
   FrameFuncao();
   static FrameFuncao* gera_frame_de_funcao(Funcao* fun);
+
+  void debug();
 };
 
 #endif

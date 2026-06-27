@@ -1,0 +1,13 @@
+RW_DEF def
+ID_LOCAL main
+OP_LPAREN (
+OP_RPAREN )
+RW_RETURN return
+ID_LOCAL soma
+OP_LPAREN (
+ID_LOCAL a
+OP_COMMA ,
+ID_LOCAL b
+OP_RPAREN )
+RW_END end
+$ $
